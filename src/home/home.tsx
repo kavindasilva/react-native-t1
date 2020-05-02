@@ -1,20 +1,22 @@
 import * as React from 'react';
 import { Platform, StyleSheet, Text, View, TextInput, Button } from 'react-native';
 
+import { Actions } from 'react-native-router-flux';
 
 export default function Login(){
   return(
     <View style={styles.container}>
       <Text style={styles.welcome}>Home page after loign</Text>
       
-      <Button title="Logout" onPress={ ()=>console.log("button pressed") } />
+      <Button title="Logout" onPress={ ()=>logoutUser() } />
     </View>
   )
 }
 
 const logoutUser = () => {
   // redirect to home
-  return true;
+  Actions.login();
+  // return true;
 }
 
 

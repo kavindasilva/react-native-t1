@@ -1,31 +1,24 @@
 import * as React from 'react';
-import { Platform, StyleSheet, Text, View } from 'react-native';
-
-const instructions = Platform.select({
-  ios: `Press Cmd+R to reload,\nCmd+D or shake for dev menu`,
-  android: `Double tap R on your keyboard to reload,\nShake or press menu button for dev menu`,
-});
-
+import { Platform, StyleSheet, Text, View, TextInput, Button } from 'react-native';
+import { Actions } from 'react-native-router-flux';
 
 export default function Login(){
   return(
     <View style={styles.container}>
       <Text style={styles.welcome}>Login!</Text>
-      <Text style={styles.instructions}>To get started, edit App.js</Text>
-      <Text style={styles.instructions}>{instructions}</Text>
-     </View>
+      <TextInput placeholder="username" />
+      <TextInput placeholder="password" textContentType="password" />
+      <Button title="Login" onPress={ ()=>validateLogin() } />
+    </View>
   )
 }
 
-// export default function login() {
-//   return (
-//     <View style={styles.container}>
-//       <Text style={styles.welcome}>Login!</Text>
-//       <Text style={styles.instructions}>To get started, edit App.js</Text>
-//       <Text style={styles.instructions}>{instructions}</Text>
-//     </View>
-//   );
-// }
+const validateLogin = () => {
+  // redirect to home
+  Actions.home()
+  // return true;
+}
+
 
 const styles = StyleSheet.create({
     container: {
