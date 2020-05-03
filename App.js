@@ -5,43 +5,23 @@ import Login from "./src/login/login"
 import Routes from "./src/router";
 
 import SideMenu from "react-native-side-menu";
-import Menu from "./src/sideBar/sideMenu"
+import SideMenuContent from "./src/sideBar/sideMenu"
 
 const instructions = Platform.select({
   ios: `Press Cmd+R to reload,\nCmd+D or shake for dev menu`,
   android: `Double tap R on your keyboard to reload,\nShake or press menu button for dev menu`,
 });
 
-// const SideMenu = require('react-native-side-menu');
-
-
-
-class ContentView extends React.Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.ios.js
-        </Text>
-        <Text style={styles.instructions}>
-          Press Cmd+R to reload,{'\n'}
-          Cmd+Control+Z for dev menu
-        </Text>
-      </View>
-    );
-  }
-}
 
 class Application extends React.Component {
   render() {
-    const menu = <Menu navigator={navigator}/>;
+    // const menu = <SideMenuContent navigator={navigator}/>;
+    const menu = <SideMenuContent navigator={navigator} onItemSelected={ (cc)=>console.log("dd") } />;
 
     return (
       <SideMenu menu={menu}>
-        <ContentView/>
+        {/* <ContentView/> */}
+        <Routes />
       </SideMenu>
     );
   }

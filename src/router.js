@@ -7,9 +7,9 @@ import About from '../src/home/about'
 const Routes = () => (
    <Router>
       <Scene key = "root">
-         <Scene key = "login" component = {Login} title = "Login" initial = {true} />
-         <Scene key = "home" component = {Home} title = "Home" initial = {false} />
-         <Scene key = "about" component = {About} title = "About" />
+         <Scene key = "login" component = {Login}  initial = {true} />
+         <Scene key = "home" component = {Home}  initial = {false} />
+         <Scene key = "about" component = {About}  />
       </Scene>
    </Router>
 )
