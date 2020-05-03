@@ -1,21 +1,20 @@
 import * as React from 'react';
 import { Platform, StyleSheet, Text, View, TextInput, Button } from 'react-native';
-import { Actions } from 'react-native-router-flux';
 
-export default function Login(){
+export default function Login({navigation}){
   return(
     <View style={styles.container}>
       <Text style={styles.welcome}>Login!</Text>
       <TextInput placeholder="username" />
       <TextInput placeholder="password" textContentType="password" />
-      <Button title="Login" onPress={ ()=>validateLogin() } />
+      {/* <Button title="Login" onPress={ ()=>validateLogin() } /> */}
+      <Button onPress={() => navigation.goBack()} title="Go back home" />
     </View>
   )
 }
 
 const validateLogin = () => {
   // redirect to home
-  Actions.home()
   // return true;
 }
 
