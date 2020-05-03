@@ -1,4 +1,8 @@
 
+/**
+ * https://github.com/react-native-community/react-native-side-menu
+ */
+
 import * as React from 'react';
 import { Platform, StyleSheet, Text, View } from 'react-native';
 
