@@ -1,30 +1,50 @@
 import * as React from 'react';
-import { Platform, StyleSheet, Text, View } from 'react-native';
+import { Platform, StyleSheet, Text, View, Button } from 'react-native';
 
 import Login from "./src/login/login"
 import Routes from "./src/router";
 
 import SideMenu from "react-native-side-menu";
-import SideMenuContent from "./src/sideBar/sideMenu"
+// import SideMecnu from "@rre";
+// import SideMenuContent from "./src/sideBar/sideMenu"
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import { NavigationContainer } from '@react-navigation/native';
 
 const instructions = Platform.select({
   ios: `Press Cmd+R to reload,\nCmd+D or shake for dev menu`,
   android: `Double tap R on your keyboard to reload,\nShake or press menu button for dev menu`,
 });
 
+function HomeScreen({ navigation }) {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Button
+        onPress={() => navigation.navigate('Notifications')}
+        title="Go to notifications"
+      />
+    </View>
+  );
+}
 
-class Application extends React.Component {
-  render() {
-    // const menu = <SideMenuContent navigator={navigator}/>;
-    const menu = <SideMenuContent navigator={navigator} onItemSelected={ (cc)=>console.log("dd") } />;
+function NotificationsScreen({ navigation }) {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Button onPress={() => navigation.goBack()} title="Go back home" />
+    </View>
+  );
+}
 
-    return (
-      <SideMenu menu={menu}>
-        {/* <ContentView/> */}
-        <Routes />
-      </SideMenu>
-    );
-  }
+const Drawer = createDrawerNavigator();
+
+function Application() {
+  return (
+    <NavigationContainer>
+      <Drawer.Navigator initialRouteName="Home">
+        <Drawer.Screen name="Home" component={HomeScreen} />
+        <Drawer.Screen name="Notifications" component={NotificationsScreen} />
+      </Drawer.Navigator>
+    </NavigationContainer>
+  );
 }
 
 export default function App(){
