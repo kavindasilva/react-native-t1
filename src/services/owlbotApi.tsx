@@ -2,17 +2,22 @@
 import React from "react";
 import axios from 'axios';
 
+import envConfig from "../../env";
+
 const urlGetWord = "https://owlbot.info/api/v4/dictionary/"; // https://owlbot.info/api/v4/dictionary/owl
 
+/**
+ * @TODO: check accessing API
+ */
 export default class owlbotAccessor extends React.Component{
     getWord(word: string){
-        return axios.get(urlGetWord + word)
+        return axios.get(urlGetWord + word, this.getAuthenticationHeader() )
 			.then(
 				res => {
 					console.log("owlbotAccessor - getWord", res);
 					if(res && res.status && res.status === 200)
 						return { err: false }
-					else
+					else if(res && res.status && res.status === 404)
 						return { err: true, errMsg: res}
 				}
 			)
@@ -22,7 +27,15 @@ export default class owlbotAccessor extends React.Component{
 			});
     }
 
-    addAuthenticationheader(){}
+    /**
+     * @TODO: verify request format
+     */
+    getAuthenticationHeader(){
+        let apiKey = envConfig.owlbotApiKey;
+        let authHeaders = "";
+        // Authorization: Token {api_key}
+        return { headers: authHeaders };
+    }
 }
 
 /**
