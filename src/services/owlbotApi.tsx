@@ -9,33 +9,31 @@ const urlGetWord = "https://owlbot.info/api/v4/dictionary/"; // https://owlbot.i
 /**
  * @TODO: check accessing API
  */
-export default class owlbotAccessor extends React.Component{
-    getWord(word: string){
-        return axios.get(urlGetWord + word, this.getAuthenticationHeader() )
-			.then(
-				res => {
-					console.log("owlbotAccessor - getWord", res);
-					if(res && res.status && res.status === 200)
-						return { err: false }
-					else if(res && res.status && res.status === 404)
-						return { err: true, errMsg: res}
-				}
-			)
-			.catch(error => {
-				console.log("owlbotAccessor - getWord-Err", error);
-				return { errMsg:error, err: true};
-			});
-    }
+export function getWord(word: string){
+    return axios.get(urlGetWord + word, getAuthenticationHeader() )
+        .then(
+            res => {
+                console.log("owlbotAccessor - getWord", res);
+                if(res && res.status && res.status === 200)
+                    return { err: false }
+                else if(res && res.status && res.status === 404)
+                    return { err: true, errMsg: res}
+            }
+        )
+        .catch(error => {
+            console.log("owlbotAccessor - getWord-Err", error);
+            return { errMsg:error, err: true};
+        });
+}
 
-    /**
-     * @TODO: verify request format
-     */
-    getAuthenticationHeader(){
-        let apiKey = envConfig.owlbotApiKey;
-        let authHeaders = "";
-        // Authorization: Token {api_key}
-        return { headers: authHeaders };
-    }
+/**
+ * @TODO: verify request format
+ */
+function getAuthenticationHeader(){
+    let apiKey = envConfig.owlbotApiKey;
+    let authHeaders = "Token "+apiKey;
+    // Authorization: Token {api_key}
+    return { headers: authHeaders };
 }
 
 /**
