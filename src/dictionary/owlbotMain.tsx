@@ -23,7 +23,7 @@ export default function OwlBotDictionary({ navigation }) {
             />
             <Button
                 onPress={() => searchWord(searchQuery)}
-                title={"search"}
+                title={"Search"}
             />
 
             <Text>{ definition }</Text>
