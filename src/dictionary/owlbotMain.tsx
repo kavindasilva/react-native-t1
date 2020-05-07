@@ -48,17 +48,22 @@ export default function OwlBotDictionary({ navigation }) {
             />
 
             {/* <Text>{ definition }</Text> */}
-            <Text>
             {
                 (wordDefinition && wordDefinition.length>0) ? 
                     wordDefinition.map( def => (
-                        <Text>{ def.definition }</Text>
+                        <React.Fragment>
+                            <Text>
+                                { def.type +". " }
+                            </Text>
+                            <Text>
+                                { def.definition }
+                            </Text>
+                        </React.Fragment>
                     ) )
-                    : ""
+                    : <Text>""</Text>
                     
                 
             }
-            </Text>
 
             <Button
                 onPress={() => navigation.navigate('Notifications')}
