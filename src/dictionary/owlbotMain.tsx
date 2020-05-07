@@ -17,9 +17,10 @@ export default function OwlBotDictionary({ navigation }) {
         const fd = async () =>{
             const res = await searchApi( searchQuery )
             console.debug("effect", res);
+            setIsLoading(false);
         };
         fd();
-    }, [searchQuery, definition] )
+    }, [definition])
 
     return (
         <View style={styles.container}>
