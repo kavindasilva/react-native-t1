@@ -33,7 +33,11 @@ function getAuthenticationHeader(){
     let apiKey = envConfig.owlbotApiKey;
     let authHeaders = "Token "+apiKey;
     // Authorization: Token {api_key}
-    return { headers: authHeaders };
+    return { 
+        headers: {
+            "Authorization": authHeaders
+        }
+    };
 }
 
 /**
