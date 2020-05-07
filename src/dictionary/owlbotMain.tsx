@@ -10,6 +10,16 @@ export default function OwlBotDictionary({ navigation }) {
     const [ searchQuery, setSearchQuery ] = useState("");
     const [ type, setType ] = useState("");
     const [ definition, setDefinition ] = useState("");
+    const [ isLoading, setIsLoading ] = useState(false);
+
+    useEffect( ()=>{
+        // setIsLoading(true);
+        const fd = async () =>{
+            const res = await searchApi( searchQuery )
+            console.debug("effect", res);
+        };
+        fd();
+    }, [searchQuery, definition] )
 
     return (
         <View style={styles.container}>
@@ -19,11 +29,21 @@ export default function OwlBotDictionary({ navigation }) {
             <TextInput
                 placeholder="enter search word"
                 value={ searchQuery }
-                onPress={ ()=>setSearchQuery(this.value) }
+                onChangeText={ (txt)=>setSearchQuery(txt) }
             />
             <Button
-                onPress={() => searchWord(searchQuery)}
+                // onPress={() => searchWord(searchQuery)}
+                // onPress={() => setDefinition(searchApi(searchQuery)) }
+                // onPress={async () => {
+                //     const res = await searchApi( searchQuery )
+                //     console.debug("btn", res);
+                // }}
+                onPress={ ()=>setDefinition(  Math.random().toString() ) }
                 title={"Search"}
+            />
+            <Button
+                onPress={() => setDefinition("teetet") }
+                title={"test state"}
             />
 
             <Text>{ definition }</Text>
@@ -37,9 +57,25 @@ export default function OwlBotDictionary({ navigation }) {
     )
 }
 
-function searchWord(param) {
-    OwlBotAccessor.getWord(param)
-    return "";
+// function searchWord(param) {
+//     console.debug("owlBotMain-searchWord",param)
+//     setDef
+// }
+
+async function searchApi(word: string) {
+    return OwlBotAccessor.getWord(word)
+        .then(
+            res => {
+                console.debug("OwlBotDictionary-searchApi", res);
+                return res;
+            }
+        );
+
+    // if success
+    // if(!apiRes.err)
+    //     return apiRes.data;
+    // else
+    //     return apiRes.errMsg
 }
 
 const logoutUser = () => {
