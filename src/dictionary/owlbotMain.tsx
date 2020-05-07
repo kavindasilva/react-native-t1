@@ -9,18 +9,18 @@ import * as OwlBotAccessor from "../services/owlbotApi"
 export default function OwlBotDictionary({ navigation }) {
     const [ searchQuery, setSearchQuery ] = useState("");
     const [ type, setType ] = useState("");
-    const [ definition, setDefinition ] = useState("");
+    const [ wordDefinition, setWordDefinition ] = useState([]);
     const [ isLoading, setIsLoading ] = useState(false);
 
-    useEffect( ()=>{
-        // setIsLoading(true);
-        const fd = async () =>{
-            const res = await searchApi( searchQuery )
-            console.debug("effect", res);
-            setIsLoading(false);
-        };
-        fd();
-    }, [definition])
+    // useEffect( ()=>{
+    //     // setIsLoading(true);
+    //     const fd = async () =>{
+    //         const res = await searchApi( searchQuery )
+    //         // console.debug("effect", res);
+    //         setIsLoading(false);
+    //     };
+    //     fd();
+    // }, [definition])
 
     return (
         <View style={styles.container}>
@@ -33,22 +33,32 @@ export default function OwlBotDictionary({ navigation }) {
                 onChangeText={ (txt)=>setSearchQuery(txt) }
             />
             <Button
-                // onPress={() => searchWord(searchQuery)}
+                onPress={ async () => {
+                    let xx = await searchApi(searchQuery);
+                    console.debug("xx:",xx);
+                    setWordDefinition(xx.definitions)
+                }}
                 // onPress={() => setDefinition(searchApi(searchQuery)) }
                 // onPress={async () => {
                 //     const res = await searchApi( searchQuery )
                 //     console.debug("btn", res);
                 // }}
-                onPress={ ()=>setDefinition(  Math.random().toString() ) }
+                // onPress={ ()=>setDefinition(  Math.random().toString() ) }
                 title={"Search"}
             />
-            <Button
-                onPress={() => setDefinition("teetet") }
-                title={"test state"}
-            />
 
-            <Text>{ definition }</Text>
-
+            {/* <Text>{ definition }</Text> */}
+            <Text>
+            {
+                (wordDefinition && wordDefinition.length>0) ? 
+                    wordDefinition.map( def => (
+                        <Text>{ def.definition }</Text>
+                    ) )
+                    : ""
+                    
+                
+            }
+            </Text>
 
             <Button
                 onPress={() => navigation.navigate('Notifications')}
@@ -64,19 +74,14 @@ export default function OwlBotDictionary({ navigation }) {
 // }
 
 async function searchApi(word: string) {
-    return OwlBotAccessor.getWord(word)
-        .then(
-            res => {
-                console.debug("OwlBotDictionary-searchApi", res);
-                return res;
-            }
-        );
+    const serviceResponse = await OwlBotAccessor.getWord(word)
+    console.debug("effect2", serviceResponse);
 
     // if success
-    // if(!apiRes.err)
-    //     return apiRes.data;
-    // else
-    //     return apiRes.errMsg
+    if(!serviceResponse.err)
+        return serviceResponse.msg;
+    else
+        return serviceResponse.msg
 }
 
 const logoutUser = () => {
