@@ -4,23 +4,14 @@ import { Platform, StyleSheet, Text, View, TextInput, Button } from 'react-nativ
 import * as OwlBotAccessor from "../services/owlbotApi"
 
 /**
- * @TODO: check state assignments
+ * help from: https://www.robinwieruch.de/react-hooks-fetch-data
  */
+
 export default function OwlBotDictionary({ navigation }) {
     const [ searchQuery, setSearchQuery ] = useState("");
     const [ type, setType ] = useState("");
     const [ wordDefinition, setWordDefinition ] = useState([]);
     const [ isLoading, setIsLoading ] = useState(false);
-
-    // useEffect( ()=>{
-    //     // setIsLoading(true);
-    //     const fd = async () =>{
-    //         const res = await searchApi( searchQuery )
-    //         // console.debug("effect", res);
-    //         setIsLoading(false);
-    //     };
-    //     fd();
-    // }, [definition])
 
     return (
         <View style={styles.container}>
@@ -34,22 +25,19 @@ export default function OwlBotDictionary({ navigation }) {
             />
             <Button
                 onPress={ async () => {
+                    setIsLoading(true);
                     let xx = await searchApi(searchQuery);
                     console.debug("xx:",xx);
                     setWordDefinition(xx.definitions)
+                    setIsLoading(false);
                 }}
-                // onPress={() => setDefinition(searchApi(searchQuery)) }
-                // onPress={async () => {
-                //     const res = await searchApi( searchQuery )
-                //     console.debug("btn", res);
-                // }}
-                // onPress={ ()=>setDefinition(  Math.random().toString() ) }
                 title={"Search"}
             />
 
-            {/* <Text>{ definition }</Text> */}
             {
-                (wordDefinition && wordDefinition.length>0) ? 
+                (isLoading)
+                ? <Text>Loading...</Text>
+                : (wordDefinition && wordDefinition.length>0) ? 
                     wordDefinition.map( def => (
                         <React.Fragment>
                             <Text>
@@ -73,10 +61,6 @@ export default function OwlBotDictionary({ navigation }) {
     )
 }
 
-// function searchWord(param) {
-//     console.debug("owlBotMain-searchWord",param)
-//     setDef
-// }
 
 async function searchApi(word: string) {
     const serviceResponse = await OwlBotAccessor.getWord(word)
