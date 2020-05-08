@@ -63,7 +63,9 @@ export default function OwlBotDictionary({ navigation }) {
                         //         keyExtractor={ (item, i) => i.toString() }
                         //     />
                         //     </SafeAreaView>
-                        : <Text>""</Text>
+                        : (wordDefinition && wordDefinition.error)?
+                            <Text style={{color:'red', backgroundColor: 'black'}}>{ wordDefinition.data }</Text>
+                            : <Text>Word not found</Text>
                         
                     
                 }
@@ -86,7 +88,7 @@ async function searchApi(word: string) {
     if(!serviceResponse.err)
         return serviceResponse.msg;
     else
-        return serviceResponse.msg
+        return { error: true, data: JSON.stringify( serviceResponse.msg ) };
 }
 
 const logoutUser = () => {

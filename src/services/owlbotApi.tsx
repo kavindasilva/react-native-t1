@@ -10,26 +10,32 @@ const urlGetWord = "https://owlbot.info/api/v4/dictionary/"; // https://owlbot.i
  * @TODO: handle 404 and other errors
  */
 export function getWord(word: string){
-    return axios.get(urlGetWord + word, getAuthenticationHeader() )
+    return axios.get(urlGetWord + word, setAuthenticationHeader() )
         .then(
             res => {
                 // console.debug("owlbotAccessor - getWord", res);
                 if(res && res.status && res.status === 200)
                     return { err: false, msg: res.data }
-                else if(res && res.status && res.status === 404)
-                    return { err: true, msg: res.data}
+                else if(res && res.status && res.status === 404){
+                    console.debug("owlbotAccessor status404:", res.data);
+                    return { err: false, msg: "Word not found" }
+                }
+                else{
+                    console.debug("owlbotAccessor statusUnknown:", res.data);
+                    return { err:true, msg: res.data }
+                }
             }
         )
         .catch(error => {
             console.log("owlbotAccessor - getWord-Err", error);
-            return { msg:error, err: true};
+            return { err: true, msg:error };
         });
 }
 
 /**
  * adds the authorization header to direct_api requests
  */
-function getAuthenticationHeader(){
+function setAuthenticationHeader(){
     let apiKey = envConfig.owlbotApiKey;
     let authHeaders = "Token "+apiKey;
     // Authorization: Token {api_key}
