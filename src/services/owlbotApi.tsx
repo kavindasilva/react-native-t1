@@ -16,18 +16,20 @@ export function getWord(word: string){
                 // console.debug("owlbotAccessor - getWord", res);
                 if(res && res.status && res.status === 200)
                     return { err: false, msg: res.data }
-                else if(res && res.status && res.status === 404){
-                    console.debug("owlbotAccessor status404:", res.data);
-                    return { err: false, msg: "Word not found" }
-                }
+                // else if(res && res.status && res.status === 404){
+                //     console.debug("owlbotAccessor status404:", res.data);
+                //     return { err: false, msg: "Word not found" }
+                // }
                 else{
                     console.debug("owlbotAccessor statusUnknown:", res.data);
-                    return { err:true, msg: res.data }
+                    return { err: true, msg: res.data }
                 }
             }
         )
         .catch(error => {
             console.log("owlbotAccessor - getWord-Err", error);
+            if(error.response && error.response.status===404)
+                return { err: true, msg:"Word not found" };
             return { err: true, msg:error };
         });
 }

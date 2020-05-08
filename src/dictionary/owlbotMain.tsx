@@ -17,6 +17,7 @@ export default function OwlBotDictionary({ navigation }) {
     const [ type, setType ] = useState("");
     const [ wordDefinition, setWordDefinition ] = useState([]);
     const [ isLoading, setIsLoading ] = useState(false);
+    const [ errors, setErrors ] = useState("");
 
     return (
         <ScrollView style={{flex:1}} keyboardShouldPersistTaps="always" >
@@ -38,7 +39,14 @@ export default function OwlBotDictionary({ navigation }) {
                         setIsLoading(true);
                         let xx = await searchApi(searchQuery);
                         console.debug("xx:",xx);
-                        setWordDefinition(xx.definitions)
+                        if(!xx.error){
+                            setWordDefinition(xx.definitions);
+                            setErrors("");
+                        }
+                        else{
+                            setErrors(xx.data);
+                            setWordDefinition([]);
+                        }
                         setIsLoading(false);
                     }}
                     title={"Search"}
@@ -63,8 +71,8 @@ export default function OwlBotDictionary({ navigation }) {
                         //         keyExtractor={ (item, i) => i.toString() }
                         //     />
                         //     </SafeAreaView>
-                        : (wordDefinition && wordDefinition.error)?
-                            <Text style={{color:'red', backgroundColor: 'black'}}>{ wordDefinition.data }</Text>
+                        : (errors)?
+                            <Text style={{color:'red', backgroundColor: 'black'}}>{ errors }</Text>
                             : <Text>Word not found</Text>
                         
                     
@@ -87,8 +95,10 @@ async function searchApi(word: string) {
     // if success
     if(!serviceResponse.err)
         return serviceResponse.msg;
-    else
+    else{
+        // console.debug("effect3", serviceResponse.msg.response.status );
         return { error: true, data: JSON.stringify( serviceResponse.msg ) };
+    }
 }
 
 const logoutUser = () => {
