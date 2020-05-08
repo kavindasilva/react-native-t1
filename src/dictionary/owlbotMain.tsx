@@ -20,7 +20,16 @@ export default function OwlBotDictionary({ navigation }) {
     return (
         <ScrollView style={{flex:1}} keyboardShouldPersistTaps="always" >
             <View style={styles.container}>
-                <Image style={{height:30, width:30}} source={{uri: 'http://africhthy.org/sites/africhthy.org/files/styles/thumbnail/public/garland_logo.png'}} />
+                <View style={{width:30, height: 30, rotation: 90}} >
+                    <Button 
+                        onPress={ ()=>navigation.openDrawer() }
+                        title="|||"
+                    />
+                </View>
+                <Image 
+                    style={{height:30, width:30}} 
+                    source={{uri: 'http://africhthy.org/sites/africhthy.org/files/styles/thumbnail/public/garland_logo.png'}} 
+                />
                 {/* <Image style={{height:30, width:30}} source={{uri: 'https://media.owlbot.info/dictionary/images/owl.jpg.400x400_q85_box-403,83,960,640_crop_detail.jpg'}} /> */}
 
                 <Text style={styles.welcome}>Welcome to OwlBot API consumer</Text>
@@ -96,7 +105,7 @@ async function searchApi(word: string) {
     else{
         console.debug("OwlBotDictionary-searchApi-sr2", serviceResponse.msg );
         // return { error: true, data: JSON.stringify( serviceResponse.msg ) };
-        return { error: true, data: JSON.stringify( serviceResponse.msg.message ) };
+        return { error: true, data: serviceResponse.msg.message };
     }
 }
 
