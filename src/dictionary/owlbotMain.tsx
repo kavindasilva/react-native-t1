@@ -19,7 +19,7 @@ export default function OwlBotDictionary({ navigation }) {
     const [ isLoading, setIsLoading ] = useState(false);
 
     return (
-        <ScrollView style={{flex:1}} >
+        <ScrollView style={{flex:1}} keyboardShouldPersistTaps="always" >
             <View style={styles.container}>
                 <Image style={{height:30, width:30}} source={{uri: 'http://africhthy.org/sites/africhthy.org/files/styles/thumbnail/public/garland_logo.png'}} />
                 {/* <Image style={{height:30, width:30}} source={{uri: 'https://media.owlbot.info/dictionary/images/owl.jpg.400x400_q85_box-403,83,960,640_crop_detail.jpg'}} /> */}
