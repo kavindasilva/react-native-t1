@@ -46,14 +46,14 @@ export default function OwlBotDictionaryCollapsibledPane({props}) {
 
             <React.Fragment>
                 <Text
-                    style={ {color: "green"} }
+                    style={ styles.definition }
                     onPress={ ()=>{
                         setIsCollapsed(!isCollapsed);
                         // setShowModal(true);
                     } }
                 >
-                    { props.type+"\n" }
-                    { props.definition }
+                    <Text style={{fontWeight:"bold"}}>{ props.type+"\n" }</Text>
+                    <Text>{ props.definition }</Text>
                 </Text>
                 <Collapsible 
                     collapsed={isCollapsed}
@@ -100,6 +100,10 @@ export default function OwlBotDictionaryCollapsibledPane({props}) {
 
 
 const styles = StyleSheet.create({
+    definition: {
+        color: "#000011",
+        backgroundColor: "#ffe042",
+    },
     centeredView: {
         flex: 1,
         justifyContent: "center",
@@ -116,7 +120,7 @@ const styles = StyleSheet.create({
         // justifyContent: 'center',
         // alignItems: 'center',
         backgroundColor: '#eeddee',
-        width: "80%",
+        width: "100%",
     },
     picture: {
         height: 70,

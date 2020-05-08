@@ -28,6 +28,7 @@ export default function OwlBotDictionary({ navigation }) {
 
                 <Text>Add search Item</Text>
                 <TextInput
+                    style={ styles.searchBar }
                     placeholder="enter search word"
                     value={ searchQuery }
                     onChangeText={ (txt)=>setSearchQuery(txt) }
@@ -94,8 +95,15 @@ const logoutUser = () => {
 
 
 const styles = StyleSheet.create({
+    searchBar: {
+        borderColor: "#000011",
+        borderWidth: 1,
+        borderRadius: 5,
+        marginBottom: 5,
+    },
     container: {
         flex: 1,
+        padding: 10,
         // justifyContent: 'center',
         // alignItems: 'center',
         backgroundColor: '#F5FCFF',
