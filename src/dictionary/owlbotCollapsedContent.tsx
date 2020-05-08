@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { Platform, StyleSheet, Text, View, TextInput, Button, Modal, TouchableHighlight } from 'react-native';
+import { Platform, StyleSheet, Text, View, TextInput, Button, Modal, TouchableHighlight, Image } from 'react-native';
 import * as OwlBotAccessor from "../services/owlbotApi"
 import Collapsible from 'react-native-collapsible';
 import Accordion from 'react-native-collapsible/Accordion';
@@ -9,7 +9,7 @@ import Accordion from 'react-native-collapsible/Accordion';
  * help from: https://www.robinwieruch.de/react-hooks-fetch-data
  */
 
-export default function OwlBotDictionaryCollapsibledPane(props: any) {
+export default function OwlBotDictionaryCollapsibledPane({props}) {
     // const [ searchQuery, setSearchQuery ] = useState("");
     // const [ type, setType ] = useState("");
     // const [ wordDefinition, setWordDefinition ] = useState([]);
@@ -17,7 +17,7 @@ export default function OwlBotDictionaryCollapsibledPane(props: any) {
     const [ isCollapsed, setIsCollapsed ] = useState(true);
     const [ showModal, setShowModal ] = useState(false);
 
-    console.debug("OwlBotDictionaryCollapsibledPane-data:", props.data);
+    console.debug("OwlBotDictionaryCollapsibledPane-data:", props);
     return (
         <View style={styles.container}>
             <Modal
@@ -46,20 +46,26 @@ export default function OwlBotDictionaryCollapsibledPane(props: any) {
 
             <React.Fragment>
                 <Text
+                    style={ {color: "green"} }
                     onPress={ ()=>{
                         setIsCollapsed(!isCollapsed);
                         // setShowModal(true);
                     } }
                 >
-                    { props.data.type+"\n" }
-                    { props.data.definition }
+                    { props.type+"\n" }
+                    { props.definition }
                 </Text>
                 <Collapsible 
                     collapsed={isCollapsed}
                     // collapsedHeight={10}
                     // style={ { height: "20px" } }
                 >
-                    <Text>collapre content</Text>
+                    <View>
+                        <Text>collapre content</Text>
+                        <Text>example: { props.example }</Text>
+                        <Image style={styles.picture} resizeMode="cover" source={{ uri: props.image_url }} />
+                        <Text>emoji: { props.emoji }</Text>
+                    </View>
                 </Collapsible>
             </React.Fragment>
         </View>
@@ -105,10 +111,16 @@ const styles = StyleSheet.create({
     openButton: {},
     textStyle: {},
     container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#F5FCFF',
+        // flexDirection: "row",
+        // flex: 1,
+        // justifyContent: 'center',
+        // alignItems: 'center',
+        backgroundColor: '#eeddee',
+        width: "80%",
+    },
+    picture: {
+        height: 70,
+        width: 100
     },
     welcome: {
         fontSize: 20,
