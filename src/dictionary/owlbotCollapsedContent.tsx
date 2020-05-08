@@ -61,7 +61,6 @@ export default function OwlBotDictionaryCollapsibledPane({props}) {
                     // style={ { height: "20px" } }
                 >
                     <View>
-                        <Text>collapre content</Text>
                         <Text>example: { props.example }</Text>
                         <Image style={styles.picture} resizeMode="cover" source={{ uri: props.image_url }} />
                         <Text>emoji: { props.emoji }</Text>
@@ -115,12 +114,15 @@ const styles = StyleSheet.create({
     openButton: {},
     textStyle: {},
     container: {
+        // marginTop: 5,
         // flexDirection: "row",
         // flex: 1,
         // justifyContent: 'center',
         // alignItems: 'center',
         backgroundColor: '#eeddee',
         width: "100%",
+        borderColor: 'green',
+        borderWidth: 1,
     },
     picture: {
         height: 70,

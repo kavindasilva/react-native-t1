@@ -43,6 +43,7 @@ export default function OwlBotDictionary({ navigation }) {
                     }}
                     title={"Search"}
                 />
+                <View style={{marginTop:5}}></View>
 
                 {
                     (isLoading)
