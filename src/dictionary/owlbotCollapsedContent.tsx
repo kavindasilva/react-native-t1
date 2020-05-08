@@ -56,8 +56,8 @@ export default function OwlBotDictionaryCollapsibledPane({props}) {
                 >
                     <View>
                         <Text>example: { props.example }</Text>
-                        <Image style={styles.picture} resizeMode="cover" source={{ uri: props.image_url }} />
-                        <Text>emoji: { props.emoji }</Text>
+                        { (props.image_url) && <Image style={styles.picture} resizeMode="cover" source={{ uri: props.image_url }} /> }
+                        { (props.emoji) && <Text>emoji: { props.emoji }</Text> }
                     </View>
                 </Collapsible>
             </React.Fragment>
