@@ -10,10 +10,6 @@ import Accordion from 'react-native-collapsible/Accordion';
  */
 
 export default function OwlBotDictionaryCollapsibledPane({props}) {
-    // const [ searchQuery, setSearchQuery ] = useState("");
-    // const [ type, setType ] = useState("");
-    // const [ wordDefinition, setWordDefinition ] = useState([]);
-    const [ isLoading, setIsLoading ] = useState(false);
     const [ isCollapsed, setIsCollapsed ] = useState(true);
     const [ showModal, setShowModal ] = useState(false);
 
@@ -57,8 +53,6 @@ export default function OwlBotDictionaryCollapsibledPane({props}) {
                 </Text>
                 <Collapsible 
                     collapsed={isCollapsed}
-                    // collapsedHeight={10}
-                    // style={ { height: "20px" } }
                 >
                     <View>
                         <Text>example: { props.example }</Text>

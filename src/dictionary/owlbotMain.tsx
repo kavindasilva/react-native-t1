@@ -2,19 +2,17 @@
 import React, { useState, useEffect } from 'react';
 import { Platform, StyleSheet, Text, View, TextInput, Button, SafeAreaView, FlatList, Image, ScrollView } from 'react-native';
 import * as OwlBotAccessor from "../services/owlbotApi"
-// import Collapsible from 'react-native-collapsible';
 import Accordion from 'react-native-collapsible/Accordion';
 import CollapsedDefinition from "../dictionary/owlbotCollapsedContent"
 // import { ScrollView } from 'react-native-gesture-handler';
 
 /**
  * help from: https://www.robinwieruch.de/react-hooks-fetch-data
- * @TODO: handle 404, and errors
+ * @TODO: handle 404 and errors efficiently
  */
 
 export default function OwlBotDictionary({ navigation }) {
     const [ searchQuery, setSearchQuery ] = useState("");
-    const [ type, setType ] = useState("");
     const [ wordDefinition, setWordDefinition ] = useState([]);
     const [ isLoading, setIsLoading ] = useState(false);
     const [ errors, setErrors ] = useState("");
@@ -90,14 +88,15 @@ export default function OwlBotDictionary({ navigation }) {
 
 async function searchApi(word: string) {
     const serviceResponse = await OwlBotAccessor.getWord(word)
-    console.debug("effect2", serviceResponse);
+    console.debug("OwlBotDictionary-searchApi-serviceResponse", serviceResponse);
 
     // if success
     if(!serviceResponse.err || typeof serviceResponse.msg==='string' ) // to detect "Word not found"
         return serviceResponse.msg;
     else{
-        // console.debug("effect3", serviceResponse.msg.response.status );
-        return { error: true, data: JSON.stringify( serviceResponse.msg ) };
+        console.debug("OwlBotDictionary-searchApi-sr2", serviceResponse.msg );
+        // return { error: true, data: JSON.stringify( serviceResponse.msg ) };
+        return { error: true, data: JSON.stringify( serviceResponse.msg.message ) };
     }
 }
 

@@ -27,7 +27,7 @@ export function getWord(word: string){
             }
         )
         .catch(error => {
-            console.log("owlbotAccessor - getWord-Err", error);
+            console.debug("owlbotAccessor - getWord-Err", error);
             if(error.response && error.response.status===404)
                 return { err: false, msg:"Word not found" };
             return { err: true, msg:error };
