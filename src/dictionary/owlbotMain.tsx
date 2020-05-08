@@ -93,7 +93,7 @@ async function searchApi(word: string) {
     console.debug("effect2", serviceResponse);
 
     // if success
-    if(!serviceResponse.err)
+    if(!serviceResponse.err || typeof serviceResponse.msg==='string' ) // to detect "Word not found"
         return serviceResponse.msg;
     else{
         // console.debug("effect3", serviceResponse.msg.response.status );
