@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { Platform, StyleSheet, Text, View, TextInput, Button, SafeAreaView, FlatList, Image, ScrollView } from 'react-native';
+import { Platform, StyleSheet, Text, View, TextInput, Button, SafeAreaView, FlatList, Image, ScrollView, ActivityIndicator } from 'react-native';
 import * as OwlBotAccessor from "../services/owlbotApi"
 import Accordion from 'react-native-collapsible/Accordion';
 import CollapsedDefinition from "../dictionary/owlbotCollapsedContent"
@@ -53,9 +53,9 @@ export default function OwlBotDictionary({ navigation }) {
 
                 {
                     (isLoading)
-                    ? <Text>Loading...</Text>
-                    : (wordDefinition && wordDefinition.length>0) ? 
-                        wordDefinition.map( (def, i) => (
+                    ? <Text>Loading...<ActivityIndicator size="small" color="#00ff00" style={{width: 10, height:10}} /></Text>
+                    : (wordDefinition && wordDefinition.length>0)
+                        ? wordDefinition.map( (def, i) => (
                             <React.Fragment key={i}>
                                 {/* <View> */}
                                     <CollapsedDefinition props={def} />
@@ -69,9 +69,9 @@ export default function OwlBotDictionary({ navigation }) {
                         //         keyExtractor={ (item, i) => i.toString() }
                         //     />
                         //     </SafeAreaView>
-                        : (errors)?
-                            <Text style={{color:'red', backgroundColor: 'black'}}>{ errors }</Text>
-                            : <Text>Word not found</Text>
+                        : (errors)
+                            ? <Text style={{color:'red', backgroundColor: 'black'}}>{ errors }</Text>
+                            : <Text></Text>
                         
                     
                 }
@@ -91,7 +91,7 @@ async function searchApi(word: string) {
     console.debug("OwlBotDictionary-searchApi-serviceResponse", serviceResponse);
 
     // if success
-    if(!serviceResponse.err || typeof serviceResponse.msg==='string' ) // to detect "Word not found"
+    if(!serviceResponse.err) 
         return serviceResponse.msg;
     else{
         console.debug("OwlBotDictionary-searchApi-sr2", serviceResponse.msg );
