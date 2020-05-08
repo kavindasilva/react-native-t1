@@ -45,7 +45,7 @@ export default function OwlBotDictionary({ navigation }) {
                     wordDefinition.map( (def, i) => (
                         <React.Fragment key={i}>
                             {/* <View> */}
-                                <CollapsedDefinition data={def} />
+                                <CollapsedDefinition props={def} />
                             {/* </View> */}
                         </React.Fragment>
                     ) )
@@ -53,7 +53,7 @@ export default function OwlBotDictionary({ navigation }) {
                     //     <FlatList
                     //         data={wordDefinition}
                     //         renderItem={({ item }) => <CollapsedDefinition data={item} />}
-                    //         // keyExtractor={ (item, i) => item.definition}
+                    //         keyExtractor={ (item, i) => i.toString() }
                     //     />
                     //     </SafeAreaView>
                     : <Text>""</Text>
