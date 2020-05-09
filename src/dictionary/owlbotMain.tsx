@@ -4,6 +4,7 @@ import { Platform, StyleSheet, Text, View, TextInput, Button, SafeAreaView, Flat
 import * as OwlBotAccessor from "../services/owlbotApi"
 import Accordion from 'react-native-collapsible/Accordion';
 import CollapsedDefinition from "../dictionary/owlbotCollapsedContent"
+import { owlBotConstants } from "../comman/constants"
 // import { ScrollView } from 'react-native-gesture-handler';
 
 /**
@@ -28,7 +29,7 @@ export default function OwlBotDictionary({ navigation }) {
                 </View>
                 <Image 
                     style={{height:30, width:30}} 
-                    source={{uri: 'http://africhthy.org/sites/africhthy.org/files/styles/thumbnail/public/garland_logo.png'}} 
+                    source={{uri: owlBotConstants.mainLogoUrl }} 
                 />
                 {/* <Image style={{height:30, width:30}} source={{uri: 'https://media.owlbot.info/dictionary/images/owl.jpg.400x400_q85_box-403,83,960,640_crop_detail.jpg'}} /> */}
 
@@ -42,6 +43,7 @@ export default function OwlBotDictionary({ navigation }) {
                     onChangeText={ (txt)=>setSearchQuery(txt) }
                 />
                 <Button
+                    disabled={ (searchQuery=="" || false) }
                     onPress={ async () => {
                         setIsLoading(true);
                         let xx = await searchApi(searchQuery);
