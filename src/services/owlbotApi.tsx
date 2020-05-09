@@ -3,8 +3,10 @@ import React from "react";
 import axios from 'axios';
 
 import envConfig from "../../env";
+import { owlBotConstants } from "../comman/constants"
 
-const urlGetWord = "https://owlbot.info/api/v4/dictionary/"; // https://owlbot.info/api/v4/dictionary/owl
+
+const urlGetWord = owlBotConstants.apiGetUrl; // https://owlbot.info/api/v4/dictionary/owl
 
 /**
  * @TODO: handle 404 and other errors
