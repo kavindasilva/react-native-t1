@@ -1,4 +1,4 @@
-package com.rrr2;
+package com.rnt1;
 
 import com.facebook.react.ReactActivity;
 
@@ -10,6 +10,6 @@ public class MainActivity extends ReactActivity {
    */
   @Override
   protected String getMainComponentName() {
-    return "rrr2";
+    return "rnt1";
   }
 }
