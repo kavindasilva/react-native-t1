@@ -3,7 +3,7 @@ import React from "react";
 import axios from 'axios';
 
 import envConfig from "../../env";
-import { owlBotConstants } from "../comman/constants"
+import { owlBotConstants } from "../common/constants"
 
 
 const urlGetWord = owlBotConstants.apiGetUrl; // https://owlbot.info/api/v4/dictionary/owl
