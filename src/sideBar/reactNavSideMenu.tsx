@@ -21,6 +21,7 @@ export default function SideMenuContent() {
     <NavigationContainer>
       <Drawer.Navigator initialRouteName="OwlDic">
         <Drawer.Screen name="OwlDic" component={OwlBotUi} />
+        {/* <Drawer.Screen name="QRscanner" component={OwlBotUi} /> */}
         <Drawer.Screen name="Home" component={HomeScreen} />
         <Drawer.Screen name="Notifications" component={LoginScreen} />
       </Drawer.Navigator>
