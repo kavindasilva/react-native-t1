@@ -4,6 +4,8 @@ import { Platform, StyleSheet, Text, View, TextInput, Button, Modal, TouchableHi
 import * as OwlBotAccessor from "../services/owlbotApi"
 import Collapsible from 'react-native-collapsible';
 import Accordion from 'react-native-collapsible/Accordion';
+// import { DatePicker } from "react-native-vector-icons/AntDesign";
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 /**
  * help from: https://www.robinwieruch.de/react-hooks-fetch-data
@@ -50,6 +52,7 @@ export default function OwlBotDictionaryCollapsibledPane({props}) {
                 >
                     <Text style={{fontWeight:"bold"}}>{ props.type+"\n" }</Text>
                     <Text>{ props.definition }</Text>
+                    <Icon name={ (isCollapsed)? "chevron-circle-down" : "chevron-circle-up" } size={16} color="#900" />
                 </Text>
                 <Collapsible 
                     collapsed={isCollapsed}
