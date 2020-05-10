@@ -1,11 +1,12 @@
 
 import React, { useState, useEffect } from 'react';
-import { Platform, StyleSheet, Text, View, TextInput, Button, SafeAreaView, FlatList, Image, ScrollView, ActivityIndicator } from 'react-native';
+import { Platform, StyleSheet, Text, View, TextInput, Button, SafeAreaView, FlatList, Image, ScrollView, ActivityIndicator, TouchableOpacity } from 'react-native';
 import * as OwlBotAccessor from "../services/owlbotApi"
 import Accordion from 'react-native-collapsible/Accordion';
 import CollapsedDefinition from "../dictionary/owlbotCollapsedContent"
 import { owlBotConstants } from "../comman/constants"
 // import { ScrollView } from 'react-native-gesture-handler';
+import EvilIcon from 'react-native-vector-icons/EvilIcons';
 
 /**
  * help from: https://www.robinwieruch.de/react-hooks-fetch-data
@@ -36,12 +37,20 @@ export default function OwlBotDictionary({ navigation }) {
                 <Text style={styles.welcome}>Welcome to OwlBot API consumer</Text>
 
                 <Text>Add search Item</Text>
-                <TextInput
-                    style={ styles.searchBar }
-                    placeholder="enter search word"
-                    value={ searchQuery }
-                    onChangeText={ (txt)=>setSearchQuery(txt) }
-                />
+                <View style={{flexDirection: 'row', justifyContent: 'space-between',}}>
+                    <TextInput
+                        style={ styles.searchBar }
+                        placeholder="enter search word"
+                        value={ searchQuery }
+                        onChangeText={ (txt)=>setSearchQuery(txt) }
+                        clearButtonMode="while-editing"
+                    />
+                    <TouchableOpacity 
+                        style={styles.closeBtnWrapper} 
+                        onPress={()=>setSearchQuery("")}
+                    ><EvilIcon name="close-o" size={20} />
+                    </TouchableOpacity>
+                </View>
                 <Button
                     disabled={ (searchQuery=="" || false) }
                     onPress={ async () => {
@@ -118,11 +127,20 @@ const logoutUser = () => {
 
 
 const styles = StyleSheet.create({
+    closeBtnWrapper: {
+        justifyContent: 'center', 
+        alignItems: 'center', 
+        marginRight: 5, 
+        backgroundColor: "#cdcdcd", 
+        width: 20,
+        height: 20
+    },
     searchBar: {
         borderColor: "#000011",
         borderWidth: 1,
         borderRadius: 5,
         marginBottom: 5,
+        width: "90%",
     },
     container: {
         flex: 1,
