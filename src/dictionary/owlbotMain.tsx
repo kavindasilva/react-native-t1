@@ -4,7 +4,7 @@ import { Platform, StyleSheet, Text, View, TextInput, Button, SafeAreaView, Flat
 import * as OwlBotAccessor from "../services/owlbotApi"
 import Accordion from 'react-native-collapsible/Accordion';
 import CollapsedDefinition from "../dictionary/owlbotCollapsedContent"
-import { owlBotConstants } from "../comman/constants"
+import { owlBotConstants } from "../common/constants"
 // import { ScrollView } from 'react-native-gesture-handler';
 import EvilIcon from 'react-native-vector-icons/EvilIcons';
 
