@@ -52,7 +52,13 @@
       "node"
     ],
     "transformIgnorePatterns": [
-      "node_modules/(?!(react-native|react-navigation-tabs|react-native-splash-screen|react-native-screens|react-native-reanimated|react-native-collapsible|react-native-vector-icons/(.*)|@expo/vector-icons|expo-font)/)"
+      "node_modules/(?!(react-native|react-navigation-tabs|react-native-splash-screen|react-native-screens|react-native-reanimated|react-native-collapsible|react-native-vector-icons/(.*)|@expo/vector-icons|expo-font)/)",
+      "node_modules/?!(creat-navigation)",
+      "node_modules/?!(@expo/vector-icons)",
+
+      "node_modules/(?!(jest-)?react-native)",
+      "node_modules/(?!(jest-)?creat-navigation)",
+      "node_modules/(?!(jest-)?@expo/vector-icons)"
     ]
   },
   "private": true
