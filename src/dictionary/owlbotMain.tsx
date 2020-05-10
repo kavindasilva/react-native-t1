@@ -37,7 +37,7 @@ export default function OwlBotDictionary({ navigation }) {
                 <Text style={styles.welcome}>Welcome to OwlBot API consumer</Text>
 
                 <Text>Add search Item</Text>
-                <View style={{flexDirection: 'row', justifyContent: 'space-between',}}>
+                <View style={styles.textInputWithCloseBtn}>
                     <TextInput
                         style={ styles.searchBar }
                         placeholder="enter search word"
@@ -45,10 +45,8 @@ export default function OwlBotDictionary({ navigation }) {
                         onChangeText={ (txt)=>setSearchQuery(txt) }
                         clearButtonMode="while-editing"
                     />
-                    <TouchableOpacity 
-                        style={styles.closeBtnWrapper} 
-                        onPress={()=>setSearchQuery("")}
-                    ><EvilIcon name="close-o" size={20} />
+                    <TouchableOpacity style={styles.clearBtnWrapper} onPress={()=>setSearchQuery("")} >
+                        <EvilIcon style={styles.clearBtn} name="close-o" size={30} />
                     </TouchableOpacity>
                 </View>
                 <Button
@@ -125,21 +123,37 @@ const logoutUser = () => {
     // return true;
 }
 
-
+/**
+ * @TODO: test with small screen sizes
+ */
 const styles = StyleSheet.create({
-    closeBtnWrapper: {
-        justifyContent: 'center', 
-        alignItems: 'center', 
-        marginRight: 5, 
+    textInputWithCloseBtn: {
+        borderColor: "#000011",
+        borderRadius: 5,
+        borderWidth: 1,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginBottom: 5,
+    },
+    clearBtn:{
+        alignContent: "center",
+        textAlignVertical: "center"
+    },
+    clearBtnWrapper: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        opacity: 0.80,
+        borderTopRightRadius: 5,
+        borderBottomRightRadius: 5,
         backgroundColor: "#cdcdcd", 
-        width: 20,
-        height: 20
+        // borderWidth:1,
+        width: 30,
     },
     searchBar: {
         borderColor: "#000011",
-        borderWidth: 1,
+        // borderWidth: 1,
         borderRadius: 5,
-        marginBottom: 5,
+        // marginBottom: 5,
         width: "90%",
     },
     container: {
