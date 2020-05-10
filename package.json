@@ -20,6 +20,7 @@
     "react": "~16.9.0",
     "react-dom": "~16.9.0",
     "react-native": "^0.61.5",
+    "react-native-camera": "^3.24.1",
     "react-native-collapsible": "^1.5.2",
     "react-native-gesture-handler": "~1.6.0",
     "react-native-material-kit": "^0.6.0-beta.1",
