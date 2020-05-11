@@ -5,7 +5,7 @@ import { Platform, StyleSheet, Text, View, Button } from 'react-native';
 // import Routes from "./src/router";
 
 
-// import SideMenuContent from "./src/sideBar/reactNavSideMenu"
+import SideMenuContent from "./src/sideBar/reactNavSideMenu"
 
 const instructions = Platform.select({
   ios: `Press Cmd+R to reload,\nCmd+D or shake for dev menu`,
@@ -17,8 +17,8 @@ export default function App(){
   // return <Login />
   // return <Routes />
   // return <Application />
-  // return <SideMenuContent />
-  return(<View><Text>dsfd</Text></View>)
+  return <SideMenuContent />
+  // return(<View><Text>dsfd</Text></View>)
 }
 
 const styles = StyleSheet.create({
